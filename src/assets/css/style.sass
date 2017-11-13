@@ -22,13 +22,13 @@ body
 
 @keyframes clipAni
   0%,100%
-    clip: rect(0px,220px,60px,218px)
+    clip: rect(0px,220px,60px,220px)//rect (top, right, bottom, left)
   25%
     clip: rect(0px,220px,2px,0px)
   50%
     clip: rect(0px,2px,60px,0px)
   75%
-    clip: rect(60px,220px,60px,0px)
+    clip: rect(58px,220px,60px,0px)
 
 @keyframes fadeXApi
   0%
@@ -53,6 +53,17 @@ body
   to
     opacity: 1
     transform: none
+
+@keyframes slideInDown
+  from
+    transform: translate3d(0, -100%, 0)
+    visibility: visible
+
+  to
+    transform: translate3d(0, 0, 0)
+
+.slideInDown
+  animation-name: slideInDown
 
 .btn
   cursor: pointer

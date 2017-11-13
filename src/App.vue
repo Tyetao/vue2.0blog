@@ -102,23 +102,22 @@
             text-align: center
             .line-in
               position: relative
-              width: 200px
+              width: 220px
+              height: 60px
               margin: 0 auto
             .line-in::before,.line-in::after
               content: ""
-              display: block
               position: absolute
-              width: 220px
-              height: 60px
-              top: -10px
-              left: -10px
+              top: 0
+              bottom: 0
+              left: 0
+              right: 0
               border: 2px solid #fff
-              z-index: 1
-              box-sizing: border-box
               animation: clipAni 6s infinite linear
             .line-in::before
               animation-delay: -3s
           h1
+            display: inline-block
             font-size: 18px
             margin: 10px 0 8px 0
       .r-bottom-container
@@ -141,6 +140,6 @@
             > div
               background: $fontColor
   .bounceInLeft-enter-active
-    animation: bounceInLeft 2s   
+    animation: slideInDown 1s   
 </style>
 

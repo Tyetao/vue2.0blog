@@ -146,7 +146,7 @@
       font-size: 20px
       margin: 60px 0
       padding-left: 20px
-      animation: rollIn 1s ease-in-out 1.8s
+      animation: rollIn 1s ease-in-out .5s
       &::before
         content: " "
         position: absolute
@@ -160,7 +160,7 @@
         border-radius: 50%
     .post
       padding: 20px 0
-      animation: fadeYApi 1.5s ease-in-out 2.5s
+      animation: fadeYApi 1.5s ease-in-out 1s
       border-bottom: 1px dashed #ccc
       &:hover
         border-bottom-color: #666
