@@ -1,57 +1,20 @@
 <template>
   <div class="home">
-    <article>
+    <article v-for="(item, index) in dataJson" :key="item.id">
       <h1>
         <a @click="goDetailsFn()">
-          Babel使用入门
+          {{item.name}}
         </a>
       </h1>
       <div class="post-meta">
-        <span>发表于 2017-05-02</span> &nbsp;&nbsp;|&nbsp;&nbsp;
-        <span>分类于 jsvascript</span> &nbsp;&nbsp;|&nbsp;&nbsp;
-        <span>阅读数 1000次</span>
+        <span>发表于 {{item.insertTime}}</span> &nbsp;&nbsp;|&nbsp;&nbsp;
+        <span>分类于 {{item.classify}}</span> &nbsp;&nbsp;|&nbsp;&nbsp;
+        <span>阅读数 {{item.rate}}次</span>
       </div>
-      <p class="desc">
-        Babel是一个广泛使用的ES6转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。 ECMAScript 6是JavaScript语言的下一代标准。因为当前版本的ES6是在2015年发布的，所以又称ECMAScript 2015。但是目前浏览器对es6不完全兼容，需要借住babel编译。</p>
-      
+      <p class="desc" v-html="filteredContent"></p>
       <button class="btn" @click="goDetailsFn()">
         阅读全文»
       </button>
-    </article>
-  
-    <article>
-      <h1>
-        <a>
-            Babel使用入门
-          </a>
-      </h1>
-      <div class="post-meta">
-        <span>发表于 2017-05-02</span> &nbsp;&nbsp;|&nbsp;&nbsp;
-        <span>分类于 jsvascript</span> &nbsp;&nbsp;|&nbsp;&nbsp;
-        <span>阅读数 1000次</span>
-      </div>
-      <p class="desc">
-        Babel是一个广泛使用的ES6转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。 ECMAScript 6是JavaScript语言的下一代标准。因为当前版本的ES6是在2015年发布的，所以又称ECMAScript 2015。但是目前浏览器对es6不完全兼容，需要借住babel编译。</p>
-      <button class="btn">
-          阅读全文»
-        </button>
-    </article>
-    <article>
-      <h1>
-        <a>
-            Babel使用入门
-          </a>
-      </h1>
-      <div class="post-meta">
-        <span>发表于 2017-05-02</span> &nbsp;&nbsp;|&nbsp;&nbsp;
-        <span>分类于 jsvascript</span> &nbsp;&nbsp;|&nbsp;&nbsp;
-        <span>阅读数 1000次</span>
-      </div>
-      <p class="desc">
-        Babel是一个广泛使用的ES6转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。 ECMAScript 6是JavaScript语言的下一代标准。因为当前版本的ES6是在2015年发布的，所以又称ECMAScript 2015。但是目前浏览器对es6不完全兼容，需要借住babel编译。</p>
-      <button class="btn">
-          阅读全文»
-        </button>
     </article>
   </div>
 </template>
@@ -62,7 +25,8 @@
     name: 'home',
     data () {
       return {
-        msg: 'home'
+        msg: 'home',
+        dataJson: []
       }
     },
     methods: {
@@ -70,7 +34,53 @@
         this.goDetails(true)
         this.$router.push('/articleDetails')
       },
+      lowEnough () {
+        let pageHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight)// 滚动内容的高度
+
+        let viewportHeight = window.innerHeight || // 窗口的高度
+            document.documentElement.clientHeight ||
+            document.body.clientHeight || 0
+
+        let scrollHeight = window.pageYOffset || // 滚动的距离
+            document.documentElement.scrollTop ||
+            document.body.scrollTop || 0
+
+        return pageHeight - viewportHeight - scrollHeight === 0
+      },
+      loadMore () {
+        this.$http.get('/articleList')
+          .then((response) => {
+            if (response.result) {
+              this.dataJson = this.dataJson.concat(response.datas)
+            } else {
+              alert(response.msg)
+            }
+            console.log(response)
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      },
       ...mapActions(['goDetails'])
+    },
+    computed: {
+      filteredContent () {
+        for (let i = 0; i < this.dataJson.length; i++) {
+          const el = this.dataJson[i]
+          return el.content.slice(0, 150)
+        }
+      }
+    },
+    created () {
+      this.loadMore()
+    },
+    mounted () {
+      window.addEventListener('scroll', () => {
+        console.log(this.lowEnough())
+        if (this.lowEnough()) {
+          this.loadMore()
+        }
+      }, false)
     }
   }
 </script>

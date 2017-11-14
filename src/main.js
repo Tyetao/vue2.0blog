@@ -17,7 +17,7 @@ Vue.config.productionTip = false
   var o = 'orientationchange' in w ? 'orientationchange' : 'resize'
   var a = function () {
     if (!w.loading) {
-      w.loading = t.querySelector('#app-wrapper')
+      w.loading = t.querySelector('#app-wrapper-mode')
       w.loading.style.display = 'block'
       cb()
     }
@@ -29,7 +29,7 @@ Vue.config.productionTip = false
     show ? window.loading.style.display = 'block' : window.loading.style.display = 'none'
   }
 
-  axios.defaults.withCredentials = true
+  // axios.defaults.withCredentials = true
   axios.defaults.headers.post['Content-Type'] = 'application/json'
   axios.defaults.baseURL = process.env.host
   axios.interceptors.request.use((config) => {

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>无限翻页测试</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #spinner{
+        position: fixed;
+        top: 20px;
+        left: 40%;
+        display: block;
+        color: red;
+        font-weight: 900;
+        background-color: rgba(80, 80, 90, 0.22);
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 100px;
+        padding-right: 100px;
+        border-radius: 15px;
+    }
+    #content{
+        height: 1100px;
+        background: red;
+        width: 100px;
+    }
+    </style>
+</head>
+<body>
+    <div id="sample">
+       <div id="content"></div>
+       <p>ssssssssssssssss</p>
+    </div>
+    <div id="spinner">
+        正在加载
+    </div>
+    <script type="text/javascript">
+        var index = 0;
+        function lowEnough(){
+            var pageHeight = Math.max(document.body.scrollHeight,document.body.offsetHeight); //滚动内容的高度
+
+            var viewportHeight = window.innerHeight ||  //窗口的高度
+                document.documentElement.clientHeight ||
+                document.body.clientHeight || 0;
+
+            var scrollHeight = window.pageYOffset || //滚动的距离
+                document.documentElement.scrollTop ||
+                document.body.scrollTop || 0;
+            // console.log(pageHeight);
+            // console.log(viewportHeight);
+            // console.log(scrollHeight);
+            return pageHeight - viewportHeight - scrollHeight == 0;
+        }
+        window.addEventListener('scroll',function(){
+            console.log(lowEnough())
+        })
+    </script>
+</body>
+</html>

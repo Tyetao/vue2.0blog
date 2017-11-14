@@ -140,6 +140,6 @@
             > div
               background: $fontColor
   .bounceInLeft-enter-active
-    animation: slideInDown 1s   
+    animation: fadeXApi 1s   
 </style>
 
