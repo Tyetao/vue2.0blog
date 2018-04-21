@@ -11,7 +11,7 @@
         <span>分类于 {{item.classify}}</span> &nbsp;&nbsp;|&nbsp;&nbsp;
         <span>阅读数 {{item.rate}}次</span>
       </div>
-      <p class="desc" v-html="filteredContent"></p>
+      <p class="desc">撒；代付款；爱上对方可阿斯兰的护发素框架的发送到罚款收到回复阿萨德撒；代付款；爱上对方可阿斯兰的护发素框架的发送到罚款收到回复阿萨德撒；代付款；爱上对方可阿斯兰的护发素框架的发送到罚款收到回复阿萨德撒；代付款；爱上对方可阿斯兰的护发素框架的发送到罚款收到回复阿萨德撒；代付款；爱上对方可阿斯兰的护发素框架的发送到罚款收到回复阿萨德</p>
       <button class="btn" @click="goDetailsFn()">
         阅读全文»
       </button>
@@ -26,7 +26,20 @@
     data () {
       return {
         msg: 'home',
-        dataJson: []
+        dataJson: [{
+          name: 'tanyetao',
+          insertTime: '2017-7-6',
+          classify: 222,
+          item: 'ssss',
+          filteredContent: '<div>撒；代付款；爱上对方可阿斯兰的护发素框架的发送到罚款收到回复阿萨德 </div>'
+        },
+        {
+          name: 'tanyetao',
+          insertTime: '2017-7-6',
+          classify: 222,
+          item: 'ssss',
+          filteredContent: '<div>撒；代付款；爱上对方可阿斯兰的护发素框架的发送到罚款收到回复阿萨德 </div>'
+        }]
       }
     },
     methods: {
@@ -64,23 +77,23 @@
       ...mapActions(['goDetails'])
     },
     computed: {
-      filteredContent () {
-        for (let i = 0; i < this.dataJson.length; i++) {
-          const el = this.dataJson[i]
-          return el.content.slice(0, 150)
-        }
-      }
+      // filteredContent () {
+      //   for (let i = 0; i < this.dataJson.length; i++) {
+      //     const el = this.dataJson[i]
+      //     return el.content.slice(0, 150)
+      //   }
+      // }
     },
     created () {
-      this.loadMore()
+      // this.loadMore()
     },
     mounted () {
-      window.addEventListener('scroll', () => {
-        console.log(this.lowEnough())
-        if (this.lowEnough()) {
-          this.loadMore()
-        }
-      }, false)
+      // window.addEventListener('scroll', () => {
+      //   console.log(this.lowEnough())
+      //   if (this.lowEnough()) {
+      //     this.loadMore()
+      //   }
+      // }, false)
     }
   }
 </script>
